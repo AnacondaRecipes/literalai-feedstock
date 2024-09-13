@@ -18,6 +18,7 @@ requirements:
   host:
     - python
     - pip
+    - wheel
   run:
     - python
     - packaging >=23.0
