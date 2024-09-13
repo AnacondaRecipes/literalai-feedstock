@@ -1,0 +1,46 @@
+{% set name = "literalai" %}
+{% set version = "0.0.622" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/literalai-{{ version }}.tar.gz
+  sha256: 8fb8fe398a6b496747a4cd0f023db109777413eeec707879a2e125a2fb2d6b77
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - packaging >=23.0
+    - httpx >=0.23.0
+    - pydantic >=1,<3
+    - chevron >=0.14.0
+
+test:
+  imports:
+    - literalai
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  summary: An SDK for observability in Python applications
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/49522
+    reason: Dependency for chainlit
+  recipe-maintainers:
+    - ianaobi
