@@ -12,6 +12,8 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  # traceloop-sdk start support python from the version 3.10
+  skip: true  # [py<310]
 
 requirements:
   host:
